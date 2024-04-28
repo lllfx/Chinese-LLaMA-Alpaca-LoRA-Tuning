@@ -169,8 +169,6 @@ def main():
     train_data = load_data(args.train_path)
     ner_collate = NerCollate(args, tokenizer)
 
-    train_datset = ner_collate.collate_fn(train_data)
-
     training_args = TrainingArguments(
         output_dir=args.save_dir,
         overwrite_output_dir=True,
@@ -201,4 +199,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
