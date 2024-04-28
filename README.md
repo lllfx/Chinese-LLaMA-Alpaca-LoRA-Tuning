@@ -70,7 +70,7 @@ torch=2.0.0
 
 - 1、下载好7B、[llama-lora](https://huggingface.co/ziqingyang/chinese-llama-plus-lora-7b)、[alpaca-lora](https://huggingface.co/ziqingyang/chinese-alpaca-plus-lora-7b)到model_hub下。进入到model_hub目录下。
 - 2、将llama转换为hugging face支持的格式：`python convert_llama_weights_to_hf.py --input_dir ./ --model_size 7B --output_dir ./7B-hf`。如果报错：`If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0`则可以`pip install --upgrade protobuf==3.20.1`，然后：`python convert_llama_weights_to_hf.py --input_dir ./ --model_size tokenizer_only --output_dir ./7B-hf`。最终我们可以得到7B-hf。
-- 3、合并lora到llama上：`python merge_llama_with_chinese_lora.py --base_model "./7B-hf" --lora_model "./chinese-llama-plus-lora-7b,chinese-alpaca-plus-lora-7b" --output_type "huggingface" --output_dir "./chinese-alpaca-7b" `。最终我们可以得到chinese-alpaca-7b。
+- 3、合并两个lora到llama上：`python merge_llama_with_chinese_lora.py --base_model "./7B-hf" --lora_model "./chinese-llama-plus-lora-7b,chinese-alpaca-plus-lora-7b" --output_type "huggingface" --output_dir "./chinese-alpaca-7b" `。最终我们可以得到chinese-alpaca-7b。
 - 4、回到主目录，进行闲聊验证是否得到正确的模型：`python chat_ner.py --base_model "./model_hub/chinese-alpaca-7b" --tokenizer_path "./model_hub/chinese-alpaca-7b" --with_prompt --interactive`
 
 ## 数据格式
